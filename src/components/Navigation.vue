@@ -13,8 +13,8 @@
                 <button class="navigation-button button"> events </button>
             </router-link>
 
-            <router-link :to="{name: 'artists'}"> 
-                <button class="navigation-button button"> artists </button>
+            <router-link :to="{name: 'login'}"> 
+                <button class="navigation-button button"> login </button>
             </router-link>
         </div>    
     </div>

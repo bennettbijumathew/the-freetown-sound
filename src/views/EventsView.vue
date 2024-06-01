@@ -6,8 +6,8 @@
     </div>
 
     <div class="row"> 
-        <div v-for="(event, index) in events" :key="event.name" class="col-12 col-sm-4 col-md-2"> 
-            <router-link :to="{path: '/events/' + index}">
+        <div v-for="event in events" :key="event.id" class="col-12 col-sm-4 col-md-2"> 
+            <router-link :to="{path: '/events/' + event.id}">
                 <img :src=event.image width="100%;" class="events-image">
                 <p class="events-name"> {{event.name}} </p>
             </router-link>
@@ -16,11 +16,24 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
+    import axios from "axios"
 
     export default {
-        computed: mapState ({
-            events: 'events'
-        })
+        data() {
+            return {
+                events: []
+            }
+        },
+
+        async created() {
+            try {
+                const response = await axios.get(`http://localhost:3000/events`);
+                this.events = response.data;
+            }
+            
+            catch (error) {
+                console.error(error);
+            }
+        }
     }
 </script>

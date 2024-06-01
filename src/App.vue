@@ -7,7 +7,7 @@
 <script>
 import navigation from '@/components/Navigation.vue'
 
-export default {
+export default {    
     components: {
         navigation
     }
