@@ -45,8 +45,8 @@
     {
       "id": "f4d6",
       "eventID": 1,
-      "title": "SOLD",
-      "text": "aasdasds",
+      "title": "asd",
+      "text": "asdasdasd",
       "user": "Kevin Knowles"
     },
     {
@@ -55,6 +55,20 @@
       "title": "asdas",
       "text": "asdasdasd",
       "user": "Kevin Knowles"
+    },
+    {
+      "id": "bd6e",
+      "eventID": 23,
+      "title": "Faye Webster concert was alright, low energy",
+      "text": "I wanted to buy a lego ring. ",
+      "user": "Groverwatch"
+    },
+    {
+      "id": "7e70",
+      "eventID": 3,
+      "title": "asd",
+      "text": "asd",
+      "user": "admin"
     }
   ],
   "events": [
@@ -203,13 +217,24 @@
       "image": "http://dummyimage.com/1280x720.png/ff4444/ffffff"
     }
   ],
-
   "accounts": [
     {
-      "id": "1", 
+      "id": "1",
       "username": "admin",
       "password": "password",
       "nickname": "Kevin Knowles"
+    },
+    {
+      "id": "e52a",
+      "username": "Groverwatch",
+      "password": "bobman$*",
+      "nickname": "Bennett Biju Mathew"
+    },
+    {
+      "id": "72f3",
+      "username": "kannes",
+      "password": "kunchacko$",
+      "nickname": "Bob Tilles"
     }
   ]
 }

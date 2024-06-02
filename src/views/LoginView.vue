@@ -20,18 +20,7 @@
         <button @click="login()"> sign in </button>
     </div>
 
-    <div v-if="this.authenticated == true">
-        <p> you have logined in ! </p>
-    </div>
-
-    <div v-if="this.authenticated == false">
-        <p> this account is not avaliable. </p>
-        <p> please sign up. </p>
-    </div>
-
-    <div v-for="account in accounts"> 
-        <p> {{ account.id }}, {{ account.username }}, {{ account.password }}</p>
-    </div>
+    <h2> {{output}}</h2>
 </template>
 
 <script>
@@ -42,9 +31,11 @@
             return {
                 accounts: [],
 
-                username: 'admin',
-                firstPassword: 'password',
-                secondPassword: 'password',  
+                username: 'Groverwatch',
+                firstPassword: 'bobman$*',
+                secondPassword: 'bobman$*',  
+
+                output: ''
             }
         },
 
@@ -59,16 +50,24 @@
             }
         },
 
+        computed: {
+            getAuthenticated() {
+                return this.$store.state.autheticated;
+            }
+        },
+
         methods: {
             login() {
                 for (let i = 0; i < this.accounts.length; i++) {
                     if (this.username == this.accounts[i].username && this.firstPassword == this.accounts[i].password  && this.secondPassword == this.accounts[i].password) {
-                        this.authenticated = true; 
+                        this.$store.state.autheticated = true;
+                        this.$store.state.currentUsername = this.accounts[i].username;
+                        this.output = 'You have logged into the website. ';
                         break; 
                     }
 
                     else {
-                        this.authenticated = false;
+                        this.output = 'You have entered the wrong details. ';
                     }
                 }
             }

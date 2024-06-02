@@ -2,7 +2,7 @@
     <p> this is for a singular event page. </p>
     <p> Index: {{currentEvent}} </p>
 
-    <div v-if="this.authenticated == true" class="alert alert-info">
+    <div v-if="getAuthenticated == true" class="alert alert-info">
         <h2> Search </h2>
         <input v-model="commentSearch">
         
@@ -14,14 +14,14 @@
         </div>
     </div>
 
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" v-if="getAuthenticated == true">
         <h2> Add </h2>
         <input type="text" v-model="titleAdd">
         <input type="text" v-model="textAdd">
         <button @click="addComment()"> submit comment </button>
     </div>
 
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" v-if="getAuthenticated == true"> 
         <h2> Edit </h2>
         <input type="text" v-model="titleEdit">
         <input type="text" v-model="textEdit">
@@ -31,8 +31,10 @@
         <h2> {{comment.title}} </h2>
         <p> {{comment.text}}</p>
         <h6> {{comment.user}}, {{comment.eventID}}</h6>
-        <button @click="deleteComment(comment.id)"> delete </button>
-        <button @click="editComment(comment.id)"> edit comment </button>
+        <div v-if="getAuthenticated == true"> 
+            <button @click="deleteComment(comment.id)"> delete </button>
+            <button @click="editComment(comment.id)"> edit comment </button>
+        </div>
     </div>
 </template>
 
@@ -77,9 +79,15 @@
             }
         },
 
+        computed: {
+            getAuthenticated() {
+                return this.$store.state.autheticated;
+            }
+        },
+
         methods: {
             async addComment() {
-                var newComment = {eventID: this.eventID, title: this.titleAdd, text: this.textAdd, user: "Kevin Knowles"};
+                var newComment = {eventID: this.eventID, title: this.titleAdd, text: this.textAdd, user: this.$store.state.currentUsername};
                 const response = await axios.post(`http://localhost:3000/comments`, newComment);
 
                 this.comments = [...this.comments, response.data];
