@@ -69,6 +69,13 @@
       "title": "asd",
       "text": "asd",
       "user": "admin"
+    },
+    {
+      "id": "2254",
+      "eventID": 0,
+      "title": "This is a new comment",
+      "text": "I dont know what to write.",
+      "user": "Groverwatch"
     }
   ],
   "events": [

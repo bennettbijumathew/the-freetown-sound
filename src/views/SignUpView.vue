@@ -1,31 +1,48 @@
 <template>
-    <p> sign up </p>
+    <div class="login row g-4">
+        <div class="col-12 col-sm-12 col-lg-12">
+            <div class="login-catchphrase neuton-extrabold"> 
+                <h2 class="neuton-bold"> sign up for the freetown sound. </h2>        
+            </div>
+        </div> 
 
-    <div> 
-        <label> username </label>
-        <input v-model="username">
-    </div>
+        <div class="col-12 col-sm-3 col-lg-3">
+            <div class="login-input">
+                <label for="username" class="neuton-bold label"> Enter account username </label>
+                <input id="username" v-model="username" class="input neuton-regular">
+            </div>
+        </div>
 
-    <div> 
-        <label> nickname </label>
-        <input v-model="nickname">
-    </div>
+        <div class="col-12 col-sm-3 col-lg-3">
+            <div class="login-input">
+                <label for="nickname" class="neuton-bold label"> Enter display name </label>
+                <input id="nickname" v-model="nickname" type="password" class="input neuton-regular">
+            </div>
+        </div>
 
-    <div> 
-        <label> password </label>
-        <input v-model="password">
-    </div>
+        <div class="col-12 col-sm-3 col-lg-3">
+            <div class="login-input">
+                <label for="password" class="neuton-bold label"> Enter the password </label>
+                <input id="password" v-model="password" type="password" class="input neuton-regular">
+            </div>
+        </div>
 
-    <div>
-        <button @click="addAccount()"> sign in </button>
-    </div>
+        <div class="col-12 col-sm-3 col-lg-3">
+            <div class="login-input">
+                <label for="submit" class="neuton-bold label"> Create new account </label>
+                <input id="submit" type="button" class="input neuton-regular" @click="addAccount()" value="Sign Up">
+            </div>
+        </div>
 
-    <div v-if="output != ''"> 
-        <p> {{output}} </p>
-    </div>
+        <div v-if="output != ''" class="col-12 col-sm-12 col-lg-12">
+            <div class="login-result">
+                <h2 class="neuton-bold label"> {{ output }} </h2>
 
-    <div v-for="account in accounts"> 
-        <p> {{ account.id }}, {{ account.username }}, {{ account.password }}</p>
+                <router-link :to="{name: 'home'}"> 
+                    <button class="input neuton-regular"> Go to Home </button>
+                </router-link>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -37,9 +54,9 @@
             return {
                 accounts: [],
 
-                username: 'admin',
-                nickname: 'Kevin Knowles',
-                password: 'password',
+                username: '',
+                nickname: '',
+                password: '',
 
                 output: ''
             }
@@ -100,3 +117,75 @@
         } 
     }
 </script>
+
+<style scoped>
+    .label {
+        padding-left: 0.4em;
+        font-size: 1.3em;
+    }
+
+    .input {
+        background-color: rgb(0, 0, 0);
+        color: white;
+        padding-left: 0.8em;
+        padding-right: 0.8em;
+        padding-bottom: 0.2em;
+
+        margin-top: 0.2em;
+        margin-left: 0.2em;
+        margin-right: 0.2em;
+
+        border-radius: 2em;
+        border: none; 
+
+        font-size: 1.2em;
+        text-align: left;
+    }
+
+    .input:hover {
+        background-color: #ff9e4f;
+        color: white;
+        transition: 0.3s;
+    }
+
+    .input:focus-visible {
+        background-color: #ee8d3f;
+        color: white;
+    }
+    
+
+    .login {
+        margin: 0.2em;
+        margin-bottom: 2em;
+    }
+
+    .login-catchphrase {
+        background: url(../assets/focal.png);
+        color: whitesmoke; 
+
+        border-radius: 2em;
+
+        align-content: center;
+        text-align: center;
+
+        height: 6em;
+        font-size: 1.6em;
+    }
+
+    .login-input {
+        background-color: rgb(230, 211, 187);
+        border-radius: 2em;
+        padding: 1em;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .login-result {
+        background-color: rgb(235, 221, 204);
+        border-radius: 2em;
+        padding: 1em;
+    }
+</style>

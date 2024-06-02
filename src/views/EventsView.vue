@@ -1,15 +1,14 @@
 <template>
-    <p> i guess this is the events page. </p>
+    <div class="events row g-4">
+        <div class="col-12 col-sm-12 col-lg-12 neuton-extrabold">
+            <div class="events-catchphrase"> 
+                <h2 class="neuton-bold"> featured events. </h2>
+            </div>
+        </div>
 
-    <div class="row focal"> 
-        <h2 class="neuton-bold"> featured events. </h2>
-    </div>
-
-    <div class="row"> 
-        <div v-for="event in events" :key="event.id" class="col-12 col-sm-4 col-md-2"> 
-            <router-link :to="{path: '/events/' + event.id}">
-                <img :src=event.image width="100%;" class="events-image">
-                <p class="events-name"> {{event.name}} </p>
+        <div v-for="event in events" :key="event.id" class="col-12 col-sm-4 col-lg-2"> 
+            <router-link :to="{path: '/events/' + event.id}" class="events-information" v-bind:style="{ 'background-image': 'linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0)), url(' + event.image + ') ' } "> 
+                <h2 class="neuton-bold"> {{event.name}} </h2>
             </router-link>
         </div>
     </div>
@@ -37,3 +36,53 @@
         }
     }
 </script>
+
+<style scoped>
+    .events {
+        margin: 0.2em;
+        margin-bottom: 2em;
+    }
+
+    .events-catchphrase {
+        background: url(../assets/focal.png);
+        color: whitesmoke; 
+
+        border-radius: 2em;
+
+        align-content: center;
+        text-align: center;
+
+        height: 6em;
+        font-size: 1.6em;
+    }
+
+    .events-information {
+        background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0)), url(../assets/focal.png);
+        color: white; 
+
+        border-radius: 2em;
+        padding: 1em;
+
+        height: 12em; 
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        text-decoration: none;
+    }
+
+    /* classes created for all screens - col */
+    @media (min-width: 0px) { 
+
+    }
+
+    /* classes created for large screens - col-sm */
+    @media (min-width: 576px) {
+
+    }
+
+    /* classes created for large screens - col-lg */
+    @media (min-width: 992px) {        
+
+    }
+</style>

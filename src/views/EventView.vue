@@ -1,8 +1,63 @@
 <template>
-    <p> this is for a singular event page. </p>
-    <p> Index: {{currentEvent}} </p>
+    <div class="event row g-3"> 
+        <div class="col-12 col-sm-12 col-lg-12">
+            <div class="event-catchphrase neuton-extrabold" v-bind:style="{ 'background-image': 'linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0)), url(' + currentEvent.image + ') ' } "> 
+                <h2 class="neuton-bold"> {{currentEvent.name}}. </h2>
+            </div>
+        </div>
 
-    <div v-if="getAuthenticated == true" class="alert alert-info">
+        <!-- <div class="col-12 col-sm-12 col-lg-12">
+            <div class="comment"> 
+                <div class="text-center">
+                    <h2 class="neuton-bold"> comments </h2>
+                </div> 
+
+                <div v-for="comment in comments" class="col-12 col-sm-12 col-lg-12">
+                    <div class="comment-card">
+                        <h2 class="neuton-bold"> {{comment.title}} </h2>
+                        <p class="neuton-regular"> {{comment.text}}</p>
+                        <h6 class="neuton-bold"> Posted by {{comment.user}} </h6>
+
+                        <div v-if="getAuthenticated == true && comment.user == this.$store.state.currentUsername"> 
+                            <button @click="deleteComment(comment.id)"> delete </button>
+                            <button @click="editComment(comment.id)"> edit comment </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div> -->
+
+        <div class="col-6 col-sm-6 col-lg-6">
+            <div class="text-center comment">
+                <h2 class="neuton-bold"> comments </h2>
+            </div> 
+        </div>
+
+        <div class="col-6 col-sm-6 col-lg-6">
+            <div class="text-center comment">
+                <button> add comment </button>
+                <button> search comments </button>
+            </div> 
+        </div>
+
+        <div v-for="comment in comments" class="col-12 col-sm-12 col-lg-12">
+            <div class="comment-card">
+                <h2 class="neuton-bold"> {{comment.title}} </h2>
+                <p class="neuton-regular"> {{comment.text}}</p>
+                <h6 class="neuton-bold"> Posted by {{comment.user}} </h6>
+
+                <div v-if="getAuthenticated == true && comment.user == this.$store.state.currentUsername"> 
+                    <button @click="deleteComment(comment.id)"> delete </button>
+                    <button @click="editComment(comment.id)"> edit comment </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--  -->
+    <!-- <div v-if="getAuthenticated == true" class="alert alert-info">
         <h2> Search </h2>
         <input v-model="commentSearch">
         
@@ -12,30 +67,20 @@
             <h6> {{comment.user}}, {{comment.eventID}}</h6>
 
         </div>
-    </div>
+    </div> -->
 
-    <div class="alert alert-danger" v-if="getAuthenticated == true">
+    <!-- <div class="alert alert-danger" v-if="getAuthenticated == true">
         <h2> Add </h2>
         <input type="text" v-model="titleAdd">
         <input type="text" v-model="textAdd">
         <button @click="addComment()"> submit comment </button>
-    </div>
+    </div> -->
 
-    <div class="alert alert-danger" v-if="getAuthenticated == true"> 
+    <!-- <div class="alert alert-danger" v-if="getAuthenticated == true"> 
         <h2> Edit </h2>
         <input type="text" v-model="titleEdit">
         <input type="text" v-model="textEdit">
-    </div>
-
-    <div v-for="comment in comments" class="alert alert-warning">
-        <h2> {{comment.title}} </h2>
-        <p> {{comment.text}}</p>
-        <h6> {{comment.user}}, {{comment.eventID}}</h6>
-        <div v-if="getAuthenticated == true"> 
-            <button @click="deleteComment(comment.id)"> delete </button>
-            <button @click="editComment(comment.id)"> edit comment </button>
-        </div>
-    </div>
+    </div> -->
 </template>
 
 <script>
@@ -129,3 +174,53 @@
     }
 
 </script>
+
+<style scoped>
+    .event {
+        margin: 0.2em;
+        margin-bottom: 2em;
+    }
+
+    .event-catchphrase {
+        background: url(../assets/focal.png);
+        color: whitesmoke; 
+
+        border-radius: 2em;
+
+        align-content: center;
+        text-align: center;
+
+        height: 6em;
+        font-size: 1.6em;
+    }
+
+    .comment {
+        background-color: rgb(211, 194, 172);
+        border-radius: 2em;
+        padding: 0.5em;
+    }
+
+    .comment-card {
+        border-radius: 2em;
+        padding: 1em;
+        background-color: antiquewhite;
+        margin-left: 1em;
+        margin-right: 1em;
+        margin-bottom: 1em;
+    }
+
+    /* classes created for all screens - col */
+    @media (min-width: 0px) { 
+
+    }
+
+    /* classes created for large screens - col-sm */
+    @media (min-width: 576px) {
+
+    }
+
+    /* classes created for large screens - col-lg */
+    @media (min-width: 992px) {        
+
+    }
+</style>

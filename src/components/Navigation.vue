@@ -6,19 +6,19 @@
 
         <div class="col-12 col-sm-12 col-lg-12">
             <router-link :to="{name: 'home'}"> 
-                <button class="button neuton-light"> home </button>
+                <button class="button neuton-regular"> home </button>
             </router-link>
 
             <router-link :to="{name: 'events'}"> 
-                <button class="button neuton-light"> events </button>
+                <button class="button neuton-regular"> events </button>
             </router-link>
 
             <router-link :to="{name: 'login'}"> 
-                <button class="button neuton-light"> login </button>
+                <button class="button neuton-regular"> login </button>
             </router-link>
 
             <router-link :to="{name: 'artists'}"> 
-                <button class="button neuton-light"> artists </button>
+                <button class="button neuton-regular"> artists </button>
             </router-link>
         </div>    
     </div>
@@ -29,6 +29,7 @@
     .navigation {
         text-align: center;
         padding: 0.5em;
+        padding-top: 1em;
     }
 
     /* classes for navigation buttons */
@@ -72,14 +73,14 @@
     /* classes created for large screens - col-sm */
     @media (min-width: 576px) {
         .navigation {
-            background-color: #b9ee3f;
+            /* background-color: #b9ee3f; */
         }
     }
 
     /* classes created for large screens - col-lg */
     @media (min-width: 992px) {
         .navigation {
-            background-color: #3feed1;
+            /* background-color: #3feed1; */
         }
         
         .button {
