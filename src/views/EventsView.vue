@@ -45,6 +45,7 @@
 
     .events-catchphrase {
         background: url(../assets/focal.png);
+        background-size: cover;
         color: whitesmoke; 
 
         border-radius: 2em;
@@ -69,20 +70,5 @@
         justify-content: flex-end;
 
         text-decoration: none;
-    }
-
-    /* classes created for all screens - col */
-    @media (min-width: 0px) { 
-
-    }
-
-    /* classes created for large screens - col-sm */
-    @media (min-width: 576px) {
-
-    }
-
-    /* classes created for large screens - col-lg */
-    @media (min-width: 992px) {        
-
     }
 </style>

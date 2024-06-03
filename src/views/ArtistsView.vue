@@ -8,8 +8,8 @@
 
         <div v-for="artist in artists" class="col-4 col-sm-12 col-lg-2">
             <div class="neuton-extrabold artists-list"> 
-                <h3> {{artist.title}} </h3>
-                <img :src="artist.thumb" class="img-fluid">
+                <h6 class="neuton-bold"> {{artist.title}} </h6>
+                <img :src="artist.cover_image" class="img-fluid artists-image">
             </div>
         </div>
     </div>
@@ -58,6 +58,7 @@
 
         height: 6em;
         font-size: 1.6em;
+        background-size: cover;
     }
 
     .artists-list {
@@ -66,6 +67,13 @@
         border-radius: 2em;
         height: 100%;
         padding: 1em;
+    }
+
+    .artists-image {
+        border-radius: 2em;
+        height: 200px;
+        width: 200px;
+        object-fit: cover;
     }
 
 </style>

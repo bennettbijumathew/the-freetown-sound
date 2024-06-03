@@ -63,26 +63,8 @@
         transition: 0.3s;
     }
 
-    /* classes created for all screens - col */
-    @media (min-width: 0px) { 
-        .navigation {
-            /* background-color: #e676a1; */
-        }
-    }
-
-    /* classes created for large screens - col-sm */
-    @media (min-width: 576px) {
-        .navigation {
-            /* background-color: #b9ee3f; */
-        }
-    }
-
     /* classes created for large screens - col-lg */
-    @media (min-width: 992px) {
-        .navigation {
-            /* background-color: #3feed1; */
-        }
-        
+    @media (min-width: 992px) {        
         .button {
             font-size: 1.2em;
         }

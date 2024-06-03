@@ -1,47 +1,49 @@
 <template>
-    <div class="login row g-4">
+    <div class="signup row g-4">
         <div class="col-12 col-sm-12 col-lg-12">
-            <div class="login-catchphrase neuton-extrabold"> 
+            <div class="signup-catchphrase neuton-extrabold"> 
                 <h2 class="neuton-bold"> sign up for the freetown sound. </h2>        
             </div>
         </div> 
 
-        <div class="col-12 col-sm-3 col-lg-3">
-            <div class="login-input">
-                <label for="username" class="neuton-bold label"> Enter account username </label>
-                <input id="username" v-model="username" class="input neuton-regular">
-            </div>
-        </div>
-
-        <div class="col-12 col-sm-3 col-lg-3">
-            <div class="login-input">
-                <label for="nickname" class="neuton-bold label"> Enter display name </label>
-                <input id="nickname" v-model="nickname" type="password" class="input neuton-regular">
-            </div>
-        </div>
-
-        <div class="col-12 col-sm-3 col-lg-3">
-            <div class="login-input">
-                <label for="password" class="neuton-bold label"> Enter the password </label>
-                <input id="password" v-model="password" type="password" class="input neuton-regular">
-            </div>
-        </div>
-
-        <div class="col-12 col-sm-3 col-lg-3">
-            <div class="login-input">
-                <label for="submit" class="neuton-bold label"> Create new account </label>
-                <input id="submit" type="button" class="input neuton-regular" @click="addAccount()" value="Sign Up">
-            </div>
-        </div>
-
         <div v-if="output != ''" class="col-12 col-sm-12 col-lg-12">
-            <div class="login-result">
-                <h2 class="neuton-bold label"> {{ output }} </h2>
+            <div class="container-fluid signup-container text-center">
+                <h3 class="neuton-bold"> {{ output }} </h3>
 
                 <router-link :to="{name: 'home'}"> 
                     <button class="input neuton-regular"> Go to Home </button>
                 </router-link>
             </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-lg-7">
+            <div class="container-fluid signup-container">
+                <h2 class="text-center neuton-bold"> Create a new account.  </h2>
+
+                <div class="signup-input">
+                    <label for="username" class="neuton-bold label"> Enter account username </label>
+                <input id="username" v-model="username" class="input neuton-regular">
+                </div>
+
+                <div class="signup-input">
+                    <label for="nickname" class="neuton-bold label"> Enter display name </label>
+                <input id="nickname" v-model="nickname" type="text" class="input neuton-regular">
+                </div>
+
+                <div class="signup-input">
+                    <label for="password" class="neuton-bold label"> Enter the password </label>
+                    <input id="password" v-model="password" type="text" class="input neuton-regular">
+                </div>
+
+                <div class="signup-input">
+                    <label for="submit" class="neuton-bold label"> Create the account </label>
+                    <input id="submit" type="button" class="input neuton-regular" @click="login()" value="Sign Up">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-lg-5"> 
+            <img src="../assets/location.jpg" class="signup-image"> 
         </div>
     </div>
 </template>
@@ -125,8 +127,9 @@
     }
 
     .input {
-        background-color: rgb(0, 0, 0);
-        color: white;
+        background-color: rgb(244, 255, 254);
+        color: black;
+        
         padding-left: 0.8em;
         padding-right: 0.8em;
         padding-bottom: 0.2em;
@@ -143,23 +146,21 @@
     }
 
     .input:hover {
-        background-color: #ff9e4f;
-        color: white;
+        background-color: rgb(210, 243, 241);
         transition: 0.3s;
     }
 
     .input:focus-visible {
-        background-color: #ee8d3f;
-        color: white;
+        background-color: rgb(204, 240, 237);
+        transition: 0.3s;
     }
-    
 
-    .login {
+    .signup {
         margin: 0.2em;
         margin-bottom: 2em;
     }
 
-    .login-catchphrase {
+    .signup-catchphrase {
         background: url(../assets/focal.png);
         color: whitesmoke; 
 
@@ -172,7 +173,13 @@
         font-size: 1.6em;
     }
 
-    .login-input {
+    .signup-container {
+        background-color: rgb(240, 230, 218);
+        border-radius: 2em;
+        padding: 1em;
+    }
+
+    .signup-input {
         background-color: rgb(230, 211, 187);
         border-radius: 2em;
         padding: 1em;
@@ -181,11 +188,21 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
+
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
     }
 
-    .login-result {
+    .signup-result {
         background-color: rgb(235, 221, 204);
         border-radius: 2em;
         padding: 1em;
+    }
+
+    .signup-image {
+        border-radius: 2em;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
     }
 </style>

@@ -21,9 +21,9 @@
         </div>
 
         <div class="col-12 col-sm-6 col-lg-6"> 
-            <router-link :to="{name: 'home'}" class="home-information waitlist-image"> 
-                <h2 class="neuton-bold"> Enter the Waitlist </h2>
-                <p class="neuton-regular"> To join the waitlist, log in and enrol yourself to the waitlist. </p>
+            <router-link :to="{name: 'login'}" class="home-information waitlist-image"> 
+                <h2 class="neuton-bold"> Accounts </h2>
+                <p class="neuton-regular"> Log into the website to access new social features. </p>
             </router-link>
         </div>
 
@@ -45,6 +45,7 @@
 
     .home-catchphrase {
         background: url(../assets/focal.png);
+        background-size: cover;
         color: whitesmoke; 
 
         border-radius: 2em;
