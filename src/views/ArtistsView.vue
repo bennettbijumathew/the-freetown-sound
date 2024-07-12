@@ -27,10 +27,10 @@
 
         async created() {
             try {
-                let keySecret = 'key=CONZXLfHzoFkwAqljPSO&secret=YovrnkerVkmaBbTKSCPoMXPrEprsKXyq';
+                let keySecret = ''; // variable for the discogs api key.
                 let artist = '';
 
-                const response = await axios.get(`https://api.discogs.com/database/search?type=artist&q=${artist}&${keySecret}`);
+                const response = await axios.get(`https://api.discogs.com/database/search?type=artist&q=${artist}&key=${keySecret}`);
                 this.artists = response.data.results;
             }
 
