@@ -1,50 +1,55 @@
 <template>
     <div class="signup row g-4">
         <div class="col-12 col-sm-12 col-lg-12">
-            <div class="signup-catchphrase neuton-extrabold"> 
-                <h2 class="neuton-bold"> sign up for the freetown sound. </h2>        
+            <div class="page-catchphrase neuton-extrabold"> 
+                <h2 class="neuton-bold"> The Account Page. </h2>        
             </div>
         </div> 
 
-        <div v-if="output != ''" class="col-12 col-sm-12 col-lg-12">
-            <div class="container-fluid signup-container text-center">
-                <h3 class="neuton-bold"> {{ output }} </h3>
+        <div class="col-12 col-sm-7 col-lg-5">
+            <div class="signup-container"> 
+                <div> 
+                    <h3 class="neuton-bold"> Create a new account </h3>     
+                </div>
 
-                <router-link :to="{name: 'home'}"> 
-                    <button class="input neuton-regular"> Go to Home </button>
-                </router-link>
-            </div>
-        </div>
+                <!-- This is the error message, it is hidden until an error is found -->
+                <div class="signup-error" v-if="error != ''"> 
+                    <p class="neuton-regular"> {{error}} </p>
+                </div>
 
-        <div class="col-12 col-sm-12 col-lg-7">
-            <div class="container-fluid signup-container">
-                <h2 class="text-center neuton-bold"> Create a new account.  </h2>
-
-                <div class="signup-input">
+                <div class="signup-inputs">
                     <label for="username" class="neuton-bold label"> Enter account username </label>
-                <input id="username" v-model="username" class="input neuton-regular">
+                    <input id="username" v-model="username" class="input neuton-regular">
                 </div>
 
-                <div class="signup-input">
-                    <label for="nickname" class="neuton-bold label"> Enter display name </label>
-                <input id="nickname" v-model="nickname" type="text" class="input neuton-regular">
+                <div class="signup-inputs">
+                    <label for="nickname" class="neuton-bold label"> Enter a nick name </label>
+                    <input id="nickname" v-model="nickname" type="text" class="input neuton-regular">
                 </div>
 
-                <div class="signup-input">
+                <div class="signup-inputs">
                     <label for="password" class="neuton-bold label"> Enter the password </label>
                     <input id="password" v-model="password" type="text" class="input neuton-regular">
                 </div>
 
-                <div class="signup-input">
-                    <label for="submit" class="neuton-bold label"> Create the account </label>
-                    <input id="submit" type="button" class="input neuton-regular" @click="login()" value="Sign Up">
+                <div class="signup-submit">
+                    <!-- This input creates a new account using the text inputs -->
+                    <input id="submit" type="button" class="button neuton-regular" @click="addAccount()" value="create">
+                    
+                    <!-- This is a link to the log in page -->
+                    <p class="neuton-regular"> 
+                        Want to log in?
+
+                        <router-link :to="{name: 'login'}" class="neuton-regular login-link"> Click here </router-link>
+                    </p>
                 </div>
             </div>
-        </div>
+        </div> 
 
-        <div class="col-12 col-sm-12 col-lg-5"> 
-            <img src="../assets/location.jpg" class="signup-image"> 
-        </div>
+        <!-- This is the image -->
+        <div class="col-12 col-sm-5 col-lg-7">
+            <div class="signup-page neuton-extrabold"> </div>
+        </div> 
     </div>
 </template>
 
@@ -60,149 +65,192 @@
                 nickname: '',
                 password: '',
 
-                output: ''
+                error: ''
             }
         },
 
         async created() {
+            // Once the state has been created, the database is loaded and put into the accounts array. 
             try {
                 const response = await axios.get(`http://localhost:3000/accounts`);
                 this.accounts = response.data;
             }
             
+            // If the database has not been loaded, an error will appear.
             catch (error) {
                 console.error(error);
             }
         },
 
-        computed: {
-            getAuthenticated() {
-                return this.$store.state.autheticated;
-            }
-        },
 
         methods: {
             async addAccount() {
-                // checks if username is similar to any other usernames 
+                // Prevents account to be added based on if inputted username is already used. 
                 for (let i = 0; i < this.accounts.length; i++) {
                     if (this.username == this.accounts[i].username) {
-                        this.output = "Choose a different username. ";
+                        this.error = "Choose a different username. ";
                         return false; 
                     }
                 }
 
-                // checks if the username has at least 5 characters
+                // If the username has less than 5 characters, don't add account.
                 if (this.username.length <= 4) {
-                    this.output = "You need at least 5 characters in your username.";
+                    this.error = "You need at least 5 characters in your username.";
                     return false;
 			    }
 
-                // checks if password has at least 8 characters
+                // If the password has less than 8 characters, don't add account.
                 if (this.password.length <= 7) {
-                    this.output = "You need at least 8 characters in your password.";
+                    this.error = "You need at least 8 characters in your password.";
                     return false;
                 }
                 
-                // checks if password has $, %, ^, &, *
+                // If the password does not have $, %, ^, &, *, dont add account. 
                 if (!/(?=[$%^&*])/.test(this.password.trim())) {
-                    this.output = "Password dosen't have any special characters such as '$', '%', '^', '&', '*'";
+                    this.error = "Password dosen't have any special characters such as '$', '%', '^', '&', '*'";
                     return false;
                 }
 
-                // adds the new account
+                // Once all of the conditions are passed, a new account is put to the variables using the details.
                 var newAccount = {username: this.username.trim(), password: this.password.trim(), nickname: this.nickname.trim()};
+                
+                // A post request is made to post the new account into the accounts database. 
                 const response = await axios.post(`http://localhost:3000/accounts`, newAccount);
+                
+                // The new account is added onto the accounts array, 
                 this.accounts = [...this.accounts, response.data];
+                this.error = '';
 
-                this.output = 'You have created a new account.';
+                // Makes the user go to the home page. 
+                this.$router.push({ path: '/' })
             }
         } 
     }
 </script>
 
 <style scoped>
-    .label {
-        padding-left: 0.4em;
-        font-size: 1.3em;
+    /* Resets all of the padding and margin to be 0 */
+    * {
+        margin: 0em;
+        padding: 0em;
     }
 
-    .input {
-        background-color: rgb(244, 255, 254);
-        color: black;
-        
-        padding-left: 0.8em;
-        padding-right: 0.8em;
-        padding-bottom: 0.2em;
-
-        margin-top: 0.2em;
-        margin-left: 0.2em;
-        margin-right: 0.2em;
-
-        border-radius: 2em;
-        border: none; 
-
-        font-size: 1.2em;
-        text-align: left;
-    }
-
-    .input:hover {
-        background-color: rgb(210, 243, 241);
-        transition: 0.3s;
-    }
-
-    .input:focus-visible {
-        background-color: rgb(204, 240, 237);
-        transition: 0.3s;
-    }
-
+    /* Classes for the signup part of the page. */
     .signup {
         margin: 0.2em;
         margin-bottom: 2em;
     }
 
-    .signup-catchphrase {
-        background: url(../assets/focal.png);
-        color: whitesmoke; 
+    .signup-container {
+        background-color: var(--signup-background);
+        
+        border-radius: 2em;
+        
+        padding: 1.5em;
+    }
+
+    .signup-inputs {
+        display: flex; 
+        flex-direction: column;
+
+        margin-top: 1.2em;
+        margin-bottom: 1.2em;
+    }
+
+    .signup-error {
+        background-color: var(--error);
+
+        border: 1px solid;
+        border-radius: 1em;
+
+        padding: 0.5em;
+
+        margin-top: 1.2em;
+        margin-bottom: 1.2em;
+    }
+    
+    .signup-submit {
+        display: flex; 
+        justify-content: space-between;
+        align-items: center;
+
+        font-size: 1.1em;
+        text-align: right;
+
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+    }
+
+    .signup-page {
+        background-image: url(../assets/signup.jpg);
+        background-size: cover;
 
         border-radius: 2em;
 
         align-content: center;
         text-align: center;
 
-        height: 6em;
-        font-size: 1.6em;
-    }
-
-    .signup-container {
-        background-color: rgb(240, 230, 218);
-        border-radius: 2em;
-        padding: 1em;
-    }
-
-    .signup-input {
-        background-color: rgb(230, 211, 187);
-        border-radius: 2em;
-        padding: 1em;
         height: 100%;
-
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
     }
 
-    .signup-result {
-        background-color: rgb(235, 221, 204);
-        border-radius: 2em;
-        padding: 1em;
+    .login-link {
+        text-decoration: none;
     }
 
-    .signup-image {
+    /* Classes for the label of each input. */
+    .label {
+        font-size: 1.1em;
+    }
+
+    /* Classes for each input. */
+    .input {
+        border: 1px solid;
+        border-radius: 1em;
+
+        padding: 0.5em;
+        padding-left: 1em;
+    }
+
+    .input:hover {
+        filter: brightness(96%);
+
+        transition: 0.3s;
+    }
+
+    .input:focus-visible {
+        filter: brightness(98%);
+
+        transition: 0.3s;
+    }
+
+    /* Classes for the button. */
+    .button {
+        background-color: var(--button);
+        color: var(--button-text);
+
+        padding-left: 0.8em;
+        padding-right: 0.8em;
+        padding-bottom: 0.3em;
+        padding-top: 0.1em;
+
         border-radius: 2em;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
+        border: none; 
+
+        font-size: 1em;
+        width: 5em;
+    }
+
+    .button:hover {
+        background-color: var(--button-hover);
+        color: var(--button-text);
+
+        transition: 0.3s;
+    }
+
+    .button:active {
+        background-color: var(--button-active);
+        color: var(--button-text);
+
+        transition: 0.3s;
     }
 </style>

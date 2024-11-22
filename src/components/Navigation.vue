@@ -13,12 +13,12 @@
                 <button class="button neuton-regular"> events </button>
             </router-link>
 
-            <router-link :to="{name: 'login'}"> 
-                <button class="button neuton-regular"> login </button>
-            </router-link>
-
             <router-link :to="{name: 'artists'}"> 
                 <button class="button neuton-regular"> artists </button>
+            </router-link>
+
+            <router-link :to="{name: 'login'}"> 
+                <button class="button neuton-regular"> account </button>
             </router-link>
         </div>    
     </div>
@@ -44,22 +44,20 @@
         border-radius: 2em;
         border: none; 
 
-        background-color: black;
-        color: white;
+        background-color: var(--button);
+        color: var(--button-text);
 
         font-size: 1.1em;
         width: 5em;
     }
 
     .button:hover {
-        background-color: #ff9e4f;
-        color: white;
+        background-color: var(--button-hover);
         transition: 0.3s;
     }
 
     .button:active {
-        background-color: #ee8d3f;
-        color: white;
+        background-color: var(--button-active);
         transition: 0.3s;
     }
 
