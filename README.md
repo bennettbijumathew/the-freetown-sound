@@ -1,6 +1,6 @@
 # the-freetown-sound
 
-![Home Page](https://imgur.com/NC8WFyS.png "Home Page")
+<img width="1905" height="1206" alt="Homepage" src="https://github.com/user-attachments/assets/d5b912df-160a-4a94-9907-10eb8e90be56" />
 
 ## Description
 The Freetown Sound is a website that is based on a fictional concert that requires a new website. This project aims to create a user experience that is responsive by utilsing tools such as Vue and Bootstrap. This project originated as a university project and was then expanded upon after the submission of the project. 
@@ -49,7 +49,5 @@ npm run serve
 ```
 
 ## Website Photos 
-![Event List Page](https://imgur.com/zxxqjVt.png "Event List Page")
-![Event Page](https://imgur.com/32wJTlg.png "Event Page")
-![Artist Page](https://imgur.com/TcTQCHK.png "Artist Page")
-![Log In](https://imgur.com/bQp190I.png "Log In")
+<img width="1905" height="2270" alt="Events Page" src="https://github.com/user-attachments/assets/2e67d439-440d-4da2-b489-8cf7ae3e3862" />
+<img width="1920" height="911" alt="Log In Page" src="https://github.com/user-attachments/assets/4afd12c5-6699-40e1-849f-ac41f8a33557" />
